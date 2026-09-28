@@ -151,7 +151,7 @@
             <div class="space-y-0.5">
               <div class="flex items-center gap-1.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-lime-400 animate-pulse"></span>
-                <span class="text-[11px] font-extrabold uppercase tracking-wider text-lime-400">Team 1</span>
+                <span id="t1HeaderTag" class="text-[11px] font-extrabold uppercase tracking-wider text-lime-400">Team 1</span>
                 <span id="t1ServingTag" class="text-[10px] px-2 py-0.5 rounded-full bg-lime-400 text-slate-950 font-black ml-1">SERVING</span>
               </div>
               <h2 id="team1DisplayName" class="text-lg sm:text-xl font-black text-white tracking-tight truncate max-w-[200px] sm:max-w-xs">Player 1 & Player 2</h2>
@@ -175,7 +175,7 @@
             <div class="space-y-0.5">
               <div class="flex items-center gap-1.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-slate-600"></span>
-                <span class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Team 2</span>
+                <span id="t2HeaderTag" class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Team 2</span>
                 <span id="t2ServingTag" class="text-[10px] px-2 py-0.5 rounded-full bg-lime-400 text-slate-950 font-black ml-1 hidden">SERVING</span>
               </div>
               <h2 id="team2DisplayName" class="text-lg sm:text-xl font-black text-white tracking-tight truncate max-w-[200px] sm:max-w-xs">Player 3 & Player 4</h2>
@@ -240,7 +240,7 @@
 
             <div class="grid grid-cols-2 gap-1.5 h-22 sm:h-26">
               <!-- Right (Even) - Index 0 -->
-              <div id="courtT2Right" class="border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between relative">
+              <div id="courtT2Right" class="border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between relative transition-all">
                 <div class="flex items-center justify-between">
                   <span class="text-[10px] text-slate-300 uppercase font-bold">Right (Even)</span>
                   <div id="roleT2Right" class="text-[9px] font-black px-1.5 py-0.5 rounded hidden"></div>
@@ -249,7 +249,7 @@
               </div>
 
               <!-- Left (Odd) - Index 1 -->
-              <div id="courtT2Left" class="border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between relative">
+              <div id="courtT2Left" class="border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between relative transition-all">
                 <div class="flex items-center justify-between">
                   <span class="text-[10px] text-slate-300 uppercase font-bold">Left (Odd)</span>
                   <div id="roleT2Left" class="text-[9px] font-black px-1.5 py-0.5 rounded hidden"></div>
@@ -277,7 +277,7 @@
           <div class="flex-1 flex flex-col justify-between">
             <div class="grid grid-cols-2 gap-1.5 h-22 sm:h-26">
               <!-- Left (Odd) - Index 0 -->
-              <div id="courtT1Left" class="border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between relative">
+              <div id="courtT1Left" class="border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between relative transition-all">
                 <div id="badgeT1Left" class="text-xs sm:text-sm font-bold text-white text-center truncate py-1.5 px-2 rounded-lg bg-slate-900/90 shadow">Player 2</div>
                 <div class="flex items-center justify-between">
                   <div id="roleT1Left" class="text-[9px] font-black px-1.5 py-0.5 rounded hidden"></div>
@@ -286,7 +286,7 @@
               </div>
 
               <!-- Right (Even) - Index 1 -->
-              <div id="courtT1Right" class="border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between relative">
+              <div id="courtT1Right" class="border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between relative transition-all">
                 <div id="badgeT1Right" class="text-xs sm:text-sm font-bold text-white text-center truncate py-1.5 px-2 rounded-lg bg-slate-900/90 shadow">Player 1</div>
                 <div class="flex items-center justify-between">
                   <div id="roleT1Right" class="text-[9px] font-black px-1.5 py-0.5 rounded hidden"></div>
@@ -399,6 +399,7 @@
 
   </main>
 
+  <!-- MATCHMAKER MODAL -->
   <div id="modalMatchmaker" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
     <div class="bg-slate-900 border-2 border-lime-400/50 rounded-3xl max-w-lg w-full p-4 sm:p-6 space-y-4 shadow-2xl max-h-[92dvh] overflow-y-auto">
       
@@ -511,6 +512,7 @@
     </div>
   </div>
 
+  <!-- DIRECT ADD PLAYER MODAL -->
   <div id="modalAddPlayerDirect" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -548,6 +550,7 @@
     </div>
   </div>
 
+  <!-- CHANGE PLAYERS / SUBSTITUTE MODAL WITH DYNAMIC DROPDOWNS -->
   <div id="modalChangePlayers" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90dvh] overflow-y-auto">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -560,7 +563,7 @@
       </div>
 
       <div class="space-y-3 text-xs">
-        <p class="text-slate-400 text-[11px]">Select active player names from the queue roster or type a custom name.</p>
+        <p class="text-slate-400 text-[11px]">Select replacement players from your bench queue roster below.</p>
 
         <div class="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
@@ -608,6 +611,7 @@
     </div>
   </div>
 
+  <!-- WINNER CELEBRATION MODAL -->
   <div id="modalWinnerCelebration" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
     <div class="bg-slate-900 border-2 border-lime-400 rounded-3xl max-w-md w-full p-6 text-center space-y-4 shadow-2xl">
       <div class="w-16 h-16 rounded-full bg-lime-400 text-slate-950 flex items-center justify-center text-3xl mx-auto shadow-xl shadow-lime-400/30">
@@ -641,7 +645,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-      const STORAGE_KEY = "pikol_pro_app_state_v9";
+      const STORAGE_KEY = "pikol_pro_app_state_v10";
 
       function loadSavedState() {
         try {
@@ -656,7 +660,9 @@
           const data = {
             roster: PikolState.roster,
             playerStats: PikolState.playerStats,
-            completedMatches: PikolState.completedMatches
+            completedMatches: PikolState.completedMatches,
+            teams: PikolState.teams,
+            positions: PikolState.positions
           };
           localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
         } catch(e) {}
@@ -674,13 +680,13 @@
         score: { team1: 0, team2: 0 },
         isSetFinished: false,
         servingTeam: 1,
-        serverNumber: 2,
+        serverNumber: 1,
         servingCourt: 'right',
-        teams: {
+        teams: saved?.teams || {
           team1: { name: "Player 1 & Player 2", players: ["Player 1", "Player 2"] },
           team2: { name: "Player 3 & Player 4", players: ["Player 3", "Player 4"] }
         },
-        positions: {
+        positions: saved?.positions || {
           team1: { left: "Player 2", right: "Player 1" },
           team2: { right: "Player 3", left: "Player 4" }
         },
@@ -760,6 +766,10 @@
       const scoreT2El = document.getElementById('scoreTeam2');
       const cardT1 = document.getElementById('cardTeam1');
       const cardT2 = document.getElementById('cardTeam2');
+      const t1HeaderTag = document.getElementById('t1HeaderTag');
+      const t2HeaderTag = document.getElementById('t2HeaderTag');
+      const btnPointT1 = document.getElementById('btnPointTeam1');
+      const btnPointT2 = document.getElementById('btnPointTeam2');
       const t1DisplayName = document.getElementById('team1DisplayName');
       const team2DisplayName = document.getElementById('team2DisplayName');
       const t1ServingTag = document.getElementById('t1ServingTag');
@@ -823,16 +833,44 @@
         t2ServingTag?.classList.toggle('hidden', isT1Serving);
 
         if (isT1Serving) {
-          cardT1?.classList.add('border-lime-400/80', 'glow-lime');
+          // Team 1 Active Serving Styling
+          cardT1?.classList.add('border-2', 'border-lime-400', 'glow-lime');
           cardT1?.classList.remove('border-slate-800');
-          cardT2?.classList.remove('border-lime-400/80', 'glow-lime');
-          cardT2?.classList.add('border-slate-800');
+          if (t1HeaderTag) { t1HeaderTag.className = 'text-[11px] font-extrabold uppercase tracking-wider text-lime-400'; }
+
+          if (btnPointT1) {
+            btnPointT1.className = 'w-full py-4 sm:py-5 rounded-2xl bg-lime-400 hover:bg-lime-300 active:scale-[0.98] text-slate-950 font-black text-base sm:text-lg transition shadow-lg shadow-lime-400/25 flex items-center justify-center gap-2';
+          }
+
+          // Team 2 Neutral Styling
+          cardT2?.classList.remove('border-2', 'border-lime-400', 'glow-lime');
+          cardT2?.classList.add('border', 'border-slate-800');
+          if (t2HeaderTag) { t2HeaderTag.className = 'text-[11px] font-extrabold uppercase tracking-wider text-slate-400'; }
+
+          if (btnPointT2) {
+            btnPointT2.className = 'w-full py-4 sm:py-5 rounded-2xl bg-slate-800 hover:bg-slate-700 active:scale-[0.98] text-white font-black text-base sm:text-lg transition border border-slate-700 shadow-md flex items-center justify-center gap-2';
+          }
+
           if (servingTeamTitle) servingTeamTitle.textContent = `${PikolState.teams.team1.name} Serving`;
         } else {
-          cardT2?.classList.add('border-lime-400/80', 'glow-lime');
+          // Team 2 Active Serving Styling
+          cardT2?.classList.add('border-2', 'border-lime-400', 'glow-lime');
           cardT2?.classList.remove('border-slate-800');
-          cardT1?.classList.remove('border-lime-400/80', 'glow-lime');
-          cardT1?.classList.add('border-slate-800');
+          if (t2HeaderTag) { t2HeaderTag.className = 'text-[11px] font-extrabold uppercase tracking-wider text-lime-400'; }
+
+          if (btnPointT2) {
+            btnPointT2.className = 'w-full py-4 sm:py-5 rounded-2xl bg-lime-400 hover:bg-lime-300 active:scale-[0.98] text-slate-950 font-black text-base sm:text-lg transition shadow-lg shadow-lime-400/25 flex items-center justify-center gap-2';
+          }
+
+          // Team 1 Neutral Styling
+          cardT1?.classList.remove('border-2', 'border-lime-400', 'glow-lime');
+          cardT1?.classList.add('border', 'border-slate-800');
+          if (t1HeaderTag) { t1HeaderTag.className = 'text-[11px] font-extrabold uppercase tracking-wider text-slate-400'; }
+
+          if (btnPointT1) {
+            btnPointT1.className = 'w-full py-4 sm:py-5 rounded-2xl bg-slate-800 hover:bg-slate-700 active:scale-[0.98] text-white font-black text-base sm:text-lg transition border border-slate-700 shadow-md flex items-center justify-center gap-2';
+          }
+
           if (servingTeamTitle) servingTeamTitle.textContent = `${PikolState.teams.team2.name} Serving`;
         }
 
@@ -857,6 +895,7 @@
 
         renderCourtPositions();
         renderRoundRobinParity();
+        saveState();
       }
 
       function renderCourtPositions() {
@@ -1313,7 +1352,7 @@
         PikolState.score = { team1: 0, team2: 0 };
         PikolState.isSetFinished = false;
         PikolState.servingTeam = PikolState.config.firstServingTeam || 1;
-        PikolState.serverNumber = (PikolState.config.format === 'doubles') ? 2 : 1;
+        PikolState.serverNumber = 1;
         PikolState.servingCourt = 'right';
         PikolState.matchHistory = [];
 
@@ -1370,7 +1409,7 @@
         PikolState.score = { team1: 0, team2: 0 };
         PikolState.isSetFinished = false;
         PikolState.servingTeam = PikolState.config.firstServingTeam || 1;
-        PikolState.serverNumber = (PikolState.config.format === 'doubles') ? 2 : 1;
+        PikolState.serverNumber = 1;
         PikolState.servingCourt = 'right';
         PikolState.matchHistory = [];
         renderScoreboard();
@@ -1515,7 +1554,7 @@
         }
       });
 
-      // Change Match Players Modal with Dropdowns
+      // Change Match Players Modal with Dynamic Bench Dropdowns
       const modalChangePlayers = document.getElementById('modalChangePlayers');
       const btnOpenChangePlayers = document.getElementById('btnOpenChangePlayers');
       const btnCloseChangePlayers = document.getElementById('btnCloseChangePlayers');
@@ -1529,26 +1568,29 @@
 
       function populatePlayerDropdowns() {
         const rosterNames = PikolState.roster.map(p => p.name);
-        const currentPlayers = [
+        const activePlayers = [
           PikolState.positions.team1.left,
           PikolState.positions.team1.right,
           PikolState.positions.team2.right,
           PikolState.positions.team2.left
         ];
 
-        // Ensure current active players are in dropdown list even if not in roster
-        const allOptions = Array.from(new Set([...rosterNames, ...currentPlayers])).filter(Boolean);
+        const benchPlayers = rosterNames.filter(name => !activePlayers.includes(name));
 
-        [selectSubT1Left, selectSubT1Right, selectSubT2Right, selectSubT2Left].forEach(sel => {
-          if (!sel) return;
-          const currentVal = sel.value;
-          sel.innerHTML = allOptions.map(name => `<option value="${name}">${name}</option>`).join('');
-        });
+        const getDropdownOptionsHtml = (currentVal) => {
+          let html = `<option value="${currentVal}" selected>${currentVal} (Current)</option>`;
+          benchPlayers.forEach(name => {
+            if (name !== currentVal) {
+              html += `<option value="${name}">${name}</option>`;
+            }
+          });
+          return html;
+        };
 
-        if (selectSubT1Left) selectSubT1Left.value = PikolState.positions.team1.left;
-        if (selectSubT1Right) selectSubT1Right.value = PikolState.positions.team1.right;
-        if (selectSubT2Right) selectSubT2Right.value = PikolState.positions.team2.right;
-        if (selectSubT2Left) selectSubT2Left.value = PikolState.positions.team2.left;
+        if (selectSubT1Left) selectSubT1Left.innerHTML = getDropdownOptionsHtml(PikolState.positions.team1.left);
+        if (selectSubT1Right) selectSubT1Right.innerHTML = getDropdownOptionsHtml(PikolState.positions.team1.right);
+        if (selectSubT2Right) selectSubT2Right.innerHTML = getDropdownOptionsHtml(PikolState.positions.team2.right);
+        if (selectSubT2Left) selectSubT2Left.innerHTML = getDropdownOptionsHtml(PikolState.positions.team2.left);
       }
 
       btnOpenChangePlayers?.addEventListener('click', () => {
@@ -1576,10 +1618,10 @@
 
       btnSaveChangePlayers?.addEventListener('click', () => {
         const isDoubles = (PikolState.config.format === 'doubles');
-        const t1L = selectSubT1Left?.value || 'Player 2';
-        const t1R = selectSubT1Right?.value || 'Player 1';
-        const t2R = selectSubT2Right?.value || 'Player 3';
-        const t2L = selectSubT2Left?.value || 'Player 4';
+        const t1L = selectSubT1Left?.value || PikolState.positions.team1.left;
+        const t1R = selectSubT1Right?.value || PikolState.positions.team1.right;
+        const t2R = selectSubT2Right?.value || PikolState.positions.team2.right;
+        const t2L = selectSubT2Left?.value || PikolState.positions.team2.left;
 
         PikolState.positions.team1.left = t1L;
         PikolState.positions.team1.right = t1R;
