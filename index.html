@@ -5,13 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Pikol - Pickleball Scoring & Court Manager</title>
 
-  <!-- PWA & Mobile Web App Meta -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#020617">
   <meta name="description" content="Official Pickleball scoring, court positions visualizer, and Round Robin queue manager.">
 
-  <!-- Tailwind CSS & FontAwesome Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +20,6 @@
     :root {
       --font-mono-score: 'Chakra Petch', monospace;
     }
-
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       touch-action: manipulation;
@@ -31,32 +28,20 @@
       background-color: #020617;
       color: #f8fafc;
       min-height: 100dvh;
-      min-height: 100svh;
       padding-top: env(safe-area-inset-top);
       padding-bottom: env(safe-area-inset-bottom);
     }
-
     .font-score {
       font-family: var(--font-mono-score);
       font-feature-settings: "tnum";
       font-variant-numeric: tabular-nums;
     }
-
     .glow-lime {
       box-shadow: 0 0 25px -3px rgba(163, 230, 53, 0.35);
     }
-
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0f172a;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 9999px;
-    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
   </style>
 </head>
 <body class="flex flex-col min-h-screen bg-slate-950 text-slate-100 antialiased selection:bg-lime-400 selection:text-slate-950">
@@ -67,20 +52,14 @@
         <i class="fa-solid fa-table-tennis-paddle-ball"></i>
       </div>
       <div>
-        <div class="flex items-center gap-1.5">
-          <h1 class="font-extrabold text-base sm:text-lg tracking-tight text-white flex items-center gap-1">
-            PIKOL <span class="text-xs px-1.5 py-0.5 rounded bg-lime-400/20 text-lime-400 font-bold border border-lime-400/30">PRO</span>
-          </h1>
-          <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold flex items-center gap-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Saved Locally
-          </span>
-        </div>
+        <h1 class="font-extrabold text-base sm:text-lg tracking-tight text-white flex items-center gap-1">
+          PIKOL <span class="text-xs px-1.5 py-0.5 rounded bg-lime-400/20 text-lime-400 font-bold border border-lime-400/30">PRO</span>
+        </h1>
       </div>
     </div>
 
-    <!-- Quick Tool Controls -->
     <div class="flex items-center space-x-1.5 sm:space-x-2">
-      <button id="btnOpenChangePlayers" title="Change Match Players" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-lime-400 border border-slate-700 transition text-xs font-bold flex items-center gap-1.5">
+      <button id="btnOpenChangePlayers" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-lime-400 border border-slate-700 transition text-xs font-bold flex items-center gap-1.5">
         <i class="fa-solid fa-user-pen"></i>
         <span class="hidden xs:inline">Change Players</span>
       </button>
@@ -90,19 +69,15 @@
         <span class="hidden xs:inline">Round Robin</span>
       </button>
 
-      <button id="btnVoiceToggle" title="Voice Announcements" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-lime-400 border border-slate-700 transition text-xs">
+      <button id="btnVoiceToggle" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-lime-400 border border-slate-700 transition text-xs">
         <i id="voiceIcon" class="fa-solid fa-volume-high"></i>
-      </button>
-
-      <button id="btnOpenRules" title="Rules & Referee" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition text-xs">
-        <i class="fa-solid fa-book-open"></i>
       </button>
     </div>
   </header>
 
   <nav class="bg-slate-900 border-b border-slate-800 px-3 sm:px-6">
     <div class="flex space-x-2 sm:space-x-4 overflow-x-auto no-scrollbar py-2 text-xs font-semibold">
-      <button id="tabScoreboard" class="nav-tab active-tab px-3 py-1.5 rounded-xl bg-lime-400 text-slate-950 font-bold transition flex items-center gap-1.5 whitespace-nowrap">
+      <button id="tabScoreboard" class="nav-tab px-3 py-1.5 rounded-xl bg-lime-400 text-slate-950 font-bold transition flex items-center gap-1.5 whitespace-nowrap">
         <i class="fa-solid fa-gamepad"></i> Live Court & Score
       </button>
       <button id="tabLeaderboard" class="nav-tab px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 hover:text-white transition flex items-center gap-1.5 whitespace-nowrap">
@@ -117,7 +92,6 @@
     </div>
   </nav>
 
-  <!-- PARITY BANNER -->
   <div id="rrParityBanner" class="bg-slate-900/80 border-b border-slate-800/80 px-3 sm:px-6 py-1.5 text-xs flex items-center justify-between overflow-x-auto">
     <div class="flex items-center space-x-2 shrink-0">
       <span class="px-2 py-0.5 rounded-md bg-lime-400/20 text-lime-400 font-bold text-[10px] uppercase tracking-wider border border-lime-400/30 flex items-center gap-1">
@@ -132,7 +106,6 @@
 
     <div id="viewScoreboard" class="space-y-4 flex flex-col flex-1">
 
-      <!-- SCORE ANNOUNCEMENT BANNER -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
         <div class="flex items-center space-x-3 w-full sm:w-auto">
           <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-lime-400 to-lime-500 text-slate-950 flex flex-col items-center justify-center font-black shadow-lg shadow-lime-400/20">
@@ -144,12 +117,12 @@
               <span id="servingTeamTitle" class="font-extrabold text-base sm:text-lg text-white">Team 1 Serving</span>
               <span id="serviceCourtSideBadge" class="text-[10px] px-2 py-0.5 rounded-md bg-slate-800 text-lime-300 border border-slate-700 font-bold">Right Court</span>
             </div>
-            <p id="scoreCallingPrompt" class="text-xs text-slate-400 font-medium">Say out loud: <span class="text-lime-300 font-bold font-score">"0 - 0 - 2"</span> before serving</p>
+            <p id="scoreCallingPrompt" class="text-xs text-slate-400 font-medium">Score Call: <span class="text-lime-300 font-bold font-score">"0 - 0 - 2"</span></p>
           </div>
         </div>
 
         <div class="flex items-center space-x-2 bg-slate-950/80 px-4 py-2 rounded-xl border border-slate-800">
-          <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Official Call:</span>
+          <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Score:</span>
           <span id="scoreThreeNumberCall" class="text-xl sm:text-2xl font-black text-lime-400 font-score tracking-wider">0 - 0 - 2</span>
         </div>
       </div>
@@ -162,7 +135,7 @@
           </div>
           <div>
             <h4 class="text-sm font-black text-white">Set / Match Complete!</h4>
-            <p class="text-xs text-lime-300 font-medium">Winner determined. Ready for the next rotation.</p>
+            <p class="text-xs text-lime-300 font-medium">Ready for the next rotation.</p>
           </div>
         </div>
         <button id="btnTriggerNextMatch" class="px-4 py-2.5 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-black text-xs transition shadow-md flex items-center gap-2">
@@ -170,7 +143,6 @@
         </button>
       </div>
 
-      <!-- TEAM SCORE CARDS -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
         
         <!-- TEAM 1 -->
@@ -223,7 +195,6 @@
 
       </div>
 
-      <!-- ACTION BUTTONS -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-bold">
         <button id="btnFaultRally" class="py-3 px-3 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition flex items-center justify-center gap-2">
           <i class="fa-solid fa-triangle-exclamation"></i>
@@ -250,7 +221,7 @@
         <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
           <div class="flex items-center space-x-2">
             <span class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-              <i class="fa-solid fa-table-tennis-paddle-ball text-lime-400"></i> Live Court Positions (Team 1: Left-Right | Team 2: Right-Left Mirror)
+              <i class="fa-solid fa-table-tennis-paddle-ball text-lime-400"></i> Live Court (Team 1: Left-Right | Team 2: Right-Left)
             </span>
           </div>
           <span id="diagonalPromptText" class="text-xs font-bold text-lime-300 hidden sm:inline">Direct Serve Target</span>
@@ -269,7 +240,7 @@
 
             <div class="grid grid-cols-2 gap-1.5 h-22 sm:h-26">
               <!-- Right (Even) - Index 0 -->
-              <div id="courtT2Right" onclick="window.pikolApp.toggleSwapT2()" class="cursor-pointer border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between transition hover:border-lime-400 relative">
+              <div id="courtT2Right" class="border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between relative">
                 <div class="flex items-center justify-between">
                   <span class="text-[10px] text-slate-300 uppercase font-bold">Right (Even)</span>
                   <div id="roleT2Right" class="text-[9px] font-black px-1.5 py-0.5 rounded hidden"></div>
@@ -278,7 +249,7 @@
               </div>
 
               <!-- Left (Odd) - Index 1 -->
-              <div id="courtT2Left" onclick="window.pikolApp.toggleSwapT2()" class="cursor-pointer border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between transition hover:border-lime-400 relative">
+              <div id="courtT2Left" class="border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between relative">
                 <div class="flex items-center justify-between">
                   <span class="text-[10px] text-slate-300 uppercase font-bold">Left (Odd)</span>
                   <div id="roleT2Left" class="text-[9px] font-black px-1.5 py-0.5 rounded hidden"></div>
@@ -288,7 +259,7 @@
             </div>
           </div>
 
-          <!-- KITCHEN & NET -->
+          <!-- NET -->
           <div class="my-2 space-y-1">
             <div class="h-6 sm:h-7 bg-teal-900/80 border-t border-b border-white/80 rounded-md flex items-center justify-center text-[10px] font-black uppercase tracking-widest text-teal-300 shadow-inner">
               NVZ • Kitchen (7 ft)
@@ -306,7 +277,7 @@
           <div class="flex-1 flex flex-col justify-between">
             <div class="grid grid-cols-2 gap-1.5 h-22 sm:h-26">
               <!-- Left (Odd) - Index 0 -->
-              <div id="courtT1Left" onclick="window.pikolApp.toggleSwapT1()" class="cursor-pointer border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between transition hover:border-lime-400 relative">
+              <div id="courtT1Left" class="border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between relative">
                 <div id="badgeT1Left" class="text-xs sm:text-sm font-bold text-white text-center truncate py-1.5 px-2 rounded-lg bg-slate-900/90 shadow">Player 2</div>
                 <div class="flex items-center justify-between">
                   <div id="roleT1Left" class="text-[9px] font-black px-1.5 py-0.5 rounded hidden"></div>
@@ -315,7 +286,7 @@
               </div>
 
               <!-- Right (Even) - Index 1 -->
-              <div id="courtT1Right" onclick="window.pikolApp.toggleSwapT1()" class="cursor-pointer border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between transition hover:border-lime-400 relative">
+              <div id="courtT1Right" class="border border-white/60 bg-sky-950/40 rounded-xl p-2 flex flex-col justify-between relative">
                 <div id="badgeT1Right" class="text-xs sm:text-sm font-bold text-white text-center truncate py-1.5 px-2 rounded-lg bg-slate-900/90 shadow">Player 1</div>
                 <div class="flex items-center justify-between">
                   <div id="roleT1Right" class="text-[9px] font-black px-1.5 py-0.5 rounded hidden"></div>
@@ -337,12 +308,13 @@
 
     </div>
 
+    <!-- STANDINGS TAB -->
     <div id="viewLeaderboard" class="hidden space-y-4">
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 space-y-4 shadow-xl">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
           <div>
             <h3 class="text-lg font-black text-white flex items-center gap-2">
-              <i class="fa-solid fa-trophy text-amber-400"></i> Player Scoring & Equal Play Leaderboard
+              <i class="fa-solid fa-trophy text-amber-400"></i> Player Scoring & Standings
             </h3>
             <p class="text-xs text-slate-400">Tracking matches played, wins, points, and equal game distribution</p>
           </div>
@@ -374,6 +346,7 @@
       </div>
     </div>
 
+    <!-- ARCHIVE TAB -->
     <div id="viewArchive" class="hidden space-y-4">
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 space-y-4 shadow-xl">
         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -396,6 +369,7 @@
       </div>
     </div>
 
+    <!-- PADDLE QUEUE TAB -->
     <div id="viewPaddleRack" class="hidden space-y-4">
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 space-y-4 shadow-xl">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
@@ -443,7 +417,6 @@
         </button>
       </div>
 
-      <!-- Step 1: Check In -->
       <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 space-y-3">
         <div class="flex items-center justify-between">
           <label class="text-xs font-bold text-lime-400 uppercase tracking-wider flex items-center gap-1.5">
@@ -463,11 +436,11 @@
           <input id="inputCheckinName" type="text" placeholder="Enter player name (or comma-separated)" class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-lime-400 text-xs">
           <div class="flex gap-2">
             <select id="inputCheckinRating" class="bg-slate-800 border border-slate-700 rounded-xl px-2 py-2 text-slate-200 text-xs focus:outline-none focus:border-lime-400">
-              <option value="2.5">2.5 (Beg)</option>
-              <option value="3.0">3.0 (Nov)</option>
-              <option value="3.5" selected>3.5 (Int)</option>
-              <option value="4.0">4.0 (Adv)</option>
-              <option value="4.5+">4.5+ (Pro)</option>
+              <option value="2.5">2.5</option>
+              <option value="3.0">3.0</option>
+              <option value="3.5" selected>3.5</option>
+              <option value="4.0">4.0</option>
+              <option value="4.5+">4.5+</option>
             </select>
             <button type="button" id="btnAddCheckinPlayer" class="px-3.5 py-2 bg-lime-400 hover:bg-lime-300 text-slate-950 font-bold text-xs rounded-xl transition flex items-center gap-1 shadow-sm whitespace-nowrap">
               <i class="fa-solid fa-plus"></i> Add
@@ -486,7 +459,6 @@
         </div>
       </div>
 
-      <!-- Step 2: Format & Target Points -->
       <div class="space-y-3 text-xs">
         <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">
           Step 2: Format & Rules
@@ -501,17 +473,26 @@
           </button>
         </div>
 
-        <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950/60 border border-slate-800">
-          <span class="text-xs font-bold text-slate-300">Play Match To:</span>
-          <div class="flex space-x-1.5">
-            <button type="button" data-pts="11" class="btnTargetPts px-2.5 py-1 rounded-lg border border-lime-400 bg-lime-400/20 text-lime-300 font-bold text-xs">11</button>
-            <button type="button" data-pts="15" class="btnTargetPts px-2.5 py-1 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 font-semibold text-xs hover:bg-slate-700">15</button>
-            <button type="button" data-pts="21" class="btnTargetPts px-2.5 py-1 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 font-semibold text-xs hover:bg-slate-700">21</button>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950/60 border border-slate-800">
+            <span class="text-xs font-bold text-slate-300">Play Match To:</span>
+            <div class="flex space-x-1.5">
+              <button type="button" data-pts="11" class="btnTargetPts px-2.5 py-1 rounded-lg border border-lime-400 bg-lime-400/20 text-lime-300 font-bold text-xs">11</button>
+              <button type="button" data-pts="15" class="btnTargetPts px-2.5 py-1 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 font-semibold text-xs hover:bg-slate-700">15</button>
+              <button type="button" data-pts="21" class="btnTargetPts px-2.5 py-1 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 font-semibold text-xs hover:bg-slate-700">21</button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950/60 border border-slate-800">
+            <span class="text-xs font-bold text-slate-300">First Server:</span>
+            <div class="flex space-x-1.5">
+              <button type="button" data-server="1" class="btnFirstServer px-3 py-1 rounded-lg border border-lime-400 bg-lime-400/20 text-lime-300 font-bold text-xs">Team 1</button>
+              <button type="button" data-server="2" class="btnFirstServer px-3 py-1 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 font-semibold text-xs hover:bg-slate-700">Team 2</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Step 3: Matchup Preview -->
       <div class="bg-slate-950/70 p-3 rounded-2xl border border-slate-800 space-y-1.5">
         <div class="flex items-center justify-between text-[11px] text-slate-400">
           <span class="font-bold text-slate-300">Next Round Robin Game Preview:</span>
@@ -530,7 +511,6 @@
     </div>
   </div>
 
-  <!-- DIRECT ADD PLAYER MODAL -->
   <div id="modalAddPlayerDirect" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -552,11 +532,11 @@
         <div>
           <label class="block text-slate-400 mb-1 font-semibold">Skill Level (DUPR)</label>
           <select id="inputDirectPlayerRating" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-lime-400">
-            <option value="2.5">2.5 (Beginner)</option>
-            <option value="3.0">3.0 (Novice)</option>
-            <option value="3.5" selected>3.5 (Intermediate)</option>
-            <option value="4.0">4.0 (Advanced)</option>
-            <option value="4.5+">4.5+ (Pro)</option>
+            <option value="2.5">2.5</option>
+            <option value="3.0">3.0</option>
+            <option value="3.5" selected>3.5</option>
+            <option value="4.0">4.0</option>
+            <option value="4.5+">4.5+</option>
           </select>
         </div>
       </div>
@@ -568,7 +548,6 @@
     </div>
   </div>
 
-  <!-- CHANGE PLAYERS MODAL -->
   <div id="modalChangePlayers" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90dvh] overflow-y-auto">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -581,12 +560,7 @@
       </div>
 
       <div class="space-y-3 text-xs">
-        <p class="text-slate-400 text-[11px]">Edit active player names or swap partners for the current match.</p>
-
-        <div class="space-y-1">
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Quick Select from Queue:</span>
-          <div id="subQuickRosterChips" class="flex flex-wrap gap-1 max-h-20 overflow-y-auto p-1.5 bg-slate-950 rounded-xl border border-slate-800"></div>
-        </div>
+        <p class="text-slate-400 text-[11px]">Select active player names from the queue roster or type a custom name.</p>
 
         <div class="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2">
           <div class="flex items-center justify-between">
@@ -597,12 +571,12 @@
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div>
-              <label class="block text-[10px] text-slate-500 mb-0.5">Left Court (Odd)</label>
-              <input id="inputSubT1Left" type="text" list="rosterDatalist" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-lime-400">
+              <label class="block text-[10px] text-slate-500 mb-0.5">Left Court</label>
+              <select id="selectSubT1Left" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-lime-400"></select>
             </div>
             <div>
-              <label class="block text-[10px] text-slate-500 mb-0.5">Right Court (Even)</label>
-              <input id="inputSubT1Right" type="text" list="rosterDatalist" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-lime-400">
+              <label class="block text-[10px] text-slate-500 mb-0.5">Right Court</label>
+              <select id="selectSubT1Right" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-lime-400"></select>
             </div>
           </div>
         </div>
@@ -616,17 +590,15 @@
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div>
-              <label class="block text-[10px] text-slate-500 mb-0.5">Right Court (Even)</label>
-              <input id="inputSubT2Right" type="text" list="rosterDatalist" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-lime-400">
+              <label class="block text-[10px] text-slate-500 mb-0.5">Right Court</label>
+              <select id="selectSubT2Right" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-lime-400"></select>
             </div>
             <div>
-              <label class="block text-[10px] text-slate-500 mb-0.5">Left Court (Odd)</label>
-              <input id="inputSubT2Left" type="text" list="rosterDatalist" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-lime-400">
+              <label class="block text-[10px] text-slate-500 mb-0.5">Left Court</label>
+              <select id="selectSubT2Left" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-lime-400"></select>
             </div>
           </div>
         </div>
-
-        <datalist id="rosterDatalist"></datalist>
       </div>
 
       <div class="flex gap-2 pt-2">
@@ -636,7 +608,6 @@
     </div>
   </div>
 
-  <!-- WINNER CELEBRATION MODAL -->
   <div id="modalWinnerCelebration" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
     <div class="bg-slate-900 border-2 border-lime-400 rounded-3xl max-w-md w-full p-6 text-center space-y-4 shadow-2xl">
       <div class="w-16 h-16 rounded-full bg-lime-400 text-slate-950 flex items-center justify-center text-3xl mx-auto shadow-xl shadow-lime-400/30">
@@ -660,33 +631,6 @@
     </div>
   </div>
 
-  <!-- RULES MODAL -->
-  <div id="modalRulesRef" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-5 space-y-4 shadow-2xl max-h-[85dvh] overflow-y-auto">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div class="flex items-center space-x-2">
-          <i class="fa-solid fa-book-bookmark text-lime-400 text-lg"></i>
-          <h3 class="text-base font-black text-white">USA Pickleball Rules & Quick Ref</h3>
-        </div>
-        <button id="btnCloseRules" class="text-slate-400 hover:text-white p-1 text-sm bg-slate-800 rounded-lg px-2 border border-slate-700">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <div class="space-y-3 text-xs text-slate-300">
-        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-          <h4 class="font-bold text-lime-400">Rule 4.B - Starting Server (0-0-2)</h4>
-          <p class="text-slate-400">At the start of each doubles game, the starting serving team only receives ONE serve turn before side-out. Hence, the starting server is designated Server 2.</p>
-        </div>
-        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-          <h4 class="font-bold text-lime-400">Rule 9.B - Non-Volley Zone (The Kitchen)</h4>
-          <p class="text-slate-400">A player cannot volley the ball while touching any part of the non-volley zone or kitchen line.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TOAST NOTIFICATION -->
   <div id="toastNotification" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-300 opacity-0 translate-y-3">
     <div class="bg-slate-900 border border-lime-400/40 text-white px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-2 text-xs font-bold">
       <i class="fa-solid fa-circle-check text-lime-400 text-sm"></i>
@@ -697,14 +641,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-      const STORAGE_KEY = "pikol_pro_app_state_v5";
+      const STORAGE_KEY = "pikol_pro_app_state_v9";
 
       function loadSavedState() {
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
-          if (raw) {
-            return JSON.parse(raw);
-          }
+          if (raw) return JSON.parse(raw);
         } catch(e) {}
         return null;
       }
@@ -726,20 +668,21 @@
         config: {
           format: 'doubles',
           targetPoints: 11,
-          voiceEnabled: true
+          voiceEnabled: true,
+          firstServingTeam: 1
         },
         score: { team1: 0, team2: 0 },
         isSetFinished: false,
         servingTeam: 1,
         serverNumber: 2,
-        servingCourt: 'right', // 'right' (even) or 'left' (odd)
+        servingCourt: 'right',
         teams: {
           team1: { name: "Player 1 & Player 2", players: ["Player 1", "Player 2"] },
           team2: { name: "Player 3 & Player 4", players: ["Player 3", "Player 4"] }
         },
         positions: {
-          team1: { left: "Player 2", right: "Player 1" }, // Team 1: Left-Right
-          team2: { right: "Player 3", left: "Player 4" }  // Team 2: Right-Left mirror
+          team1: { left: "Player 2", right: "Player 1" },
+          team2: { right: "Player 3", left: "Player 4" }
         },
         roster: saved?.roster || [],
         playerStats: saved?.playerStats || {},
@@ -791,6 +734,25 @@
             utter.pitch = 1.0;
             window.speechSynthesis.speak(utter);
           } catch(e) {}
+        },
+        speakMatchStart() {
+          if (!PikolState.config.voiceEnabled || !('speechSynthesis' in window)) return;
+          try {
+            window.speechSynthesis.cancel();
+            const isT1 = (PikolState.servingTeam === 1);
+            const sScore = isT1 ? PikolState.score.team1 : PikolState.score.team2;
+            const rScore = isT1 ? PikolState.score.team2 : PikolState.score.team1;
+            
+            let call = `New set. ${sScore}, ${rScore}`;
+            if (PikolState.config.format === 'doubles') {
+              call += `, ${PikolState.serverNumber}`;
+            }
+
+            const utter = new SpeechSynthesisUtterance(call);
+            utter.rate = 1.0;
+            utter.pitch = 1.0;
+            window.speechSynthesis.speak(utter);
+          } catch(e) {}
         }
       };
 
@@ -812,7 +774,6 @@
 
       const modalMatchmaker = document.getElementById('modalMatchmaker');
       const modalWinnerCelebration = document.getElementById('modalWinnerCelebration');
-      const modalRulesRef = document.getElementById('modalRulesRef');
       const setFinishedContainer = document.getElementById('setFinishedNextMatchContainer');
 
       function showToast(msg) {
@@ -842,7 +803,6 @@
 
         let team1Players, team2Players;
         if (PikolState.config.format === 'doubles') {
-          // Team 1: [Left, Right], Team 2: [Right, Left] (Mirrored)
           team1Players = [activePlayers[0].name, activePlayers[1].name];
           team2Players = [activePlayers[2].name, activePlayers[3].name];
         } else {
@@ -850,12 +810,7 @@
           team2Players = [activePlayers[1].name];
         }
 
-        return {
-          activePlayers,
-          restingPlayers,
-          team1: team1Players,
-          team2: team2Players
-        };
+        return { activePlayers, restingPlayers, team1: team1Players, team2: team2Players };
       }
 
       function renderScoreboard() {
@@ -893,10 +848,6 @@
         }
 
         if (scoreThreeNumberCall) scoreThreeNumberCall.textContent = callString;
-        if (scoreCallingPrompt) {
-          scoreCallingPrompt.innerHTML = `Say out loud: <span class="text-lime-300 font-bold font-score">"${callString}"</span> before serving`;
-        }
-
         if (t1DisplayName) t1DisplayName.textContent = PikolState.teams.team1.name;
         if (team2DisplayName) team2DisplayName.textContent = PikolState.teams.team2.name;
 
@@ -923,7 +874,6 @@
         const roleT1L = document.getElementById('roleT1Left');
         const roleT2R = document.getElementById('roleT2Right');
         const roleT2L = document.getElementById('roleT2Left');
-        const diagNotice = document.getElementById('diagonalPromptText');
 
         if (!bT1R || !bT1L || !bT2R || !bT2L) return;
 
@@ -946,81 +896,31 @@
 
         const isT1 = (PikolState.servingTeam === 1);
         const court = PikolState.servingCourt; // 'right' or 'left'
-        let activeServerName = '';
-        let activeReceiverName = '';
 
         if (isT1) {
           if (court === 'right') {
-            cT1R?.classList.remove('bg-sky-950/40');
-            cT1R?.classList.add('border-lime-400', 'bg-lime-950/60');
-            cT2R?.classList.remove('bg-sky-950/40');
-            cT2R?.classList.add('border-sky-400', 'bg-sky-950/60');
-
-            if (roleT1R) {
-              roleT1R.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-lime-400 text-slate-950 shadow flex items-center gap-1';
-              roleT1R.innerHTML = '<i class="fa-solid fa-table-tennis-paddle-ball text-[8px]"></i> SERVER';
-            }
-            if (roleT2R) {
-              roleT2R.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-sky-400 text-slate-950 shadow flex items-center gap-1';
-              roleT2R.innerHTML = '<i class="fa-solid fa-crosshairs text-[8px]"></i> RECEIVER';
-            }
-            activeServerName = PikolState.positions.team1.right;
-            activeReceiverName = PikolState.positions.team2.right;
+            cT1R?.classList.remove('bg-sky-950/40'); cT1R?.classList.add('border-lime-400', 'bg-lime-950/60');
+            cT2R?.classList.remove('bg-sky-950/40'); cT2R?.classList.add('border-sky-400', 'bg-sky-950/60');
+            if (roleT1R) { roleT1R.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-lime-400 text-slate-950 shadow'; roleT1R.textContent = 'SERVER'; roleT1R.classList.remove('hidden'); }
+            if (roleT2R) { roleT2R.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-sky-400 text-slate-950 shadow'; roleT2R.textContent = 'RECEIVER'; roleT2R.classList.remove('hidden'); }
           } else {
-            cT1L?.classList.remove('bg-sky-950/40');
-            cT1L?.classList.add('border-lime-400', 'bg-lime-950/60');
-            cT2L?.classList.remove('bg-sky-950/40');
-            cT2L?.classList.add('border-sky-400', 'bg-sky-950/60');
-
-            if (roleT1L) {
-              roleT1L.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-lime-400 text-slate-950 shadow flex items-center gap-1';
-              roleT1L.innerHTML = '<i class="fa-solid fa-table-tennis-paddle-ball text-[8px]"></i> SERVER';
-            }
-            if (roleT2L) {
-              roleT2L.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-sky-400 text-slate-950 shadow flex items-center gap-1';
-              roleT2L.innerHTML = '<i class="fa-solid fa-crosshairs text-[8px]"></i> RECEIVER';
-            }
-            activeServerName = PikolState.positions.team1.left;
-            activeReceiverName = PikolState.positions.team2.left;
+            cT1L?.classList.remove('bg-sky-950/40'); cT1L?.classList.add('border-lime-400', 'bg-lime-950/60');
+            cT2L?.classList.remove('bg-sky-950/40'); cT2L?.classList.add('border-sky-400', 'bg-sky-950/60');
+            if (roleT1L) { roleT1L.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-lime-400 text-slate-950 shadow'; roleT1L.textContent = 'SERVER'; roleT1L.classList.remove('hidden'); }
+            if (roleT2L) { roleT2L.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-sky-400 text-slate-950 shadow'; roleT2L.textContent = 'RECEIVER'; roleT2L.classList.remove('hidden'); }
           }
         } else {
           if (court === 'right') {
-            cT2R?.classList.remove('bg-sky-950/40');
-            cT2R?.classList.add('border-lime-400', 'bg-lime-950/60');
-            cT1R?.classList.remove('bg-sky-950/40');
-            cT1R?.classList.add('border-sky-400', 'bg-sky-950/60');
-
-            if (roleT2R) {
-              roleT2R.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-lime-400 text-slate-950 shadow flex items-center gap-1';
-              roleT2R.innerHTML = '<i class="fa-solid fa-table-tennis-paddle-ball text-[8px]"></i> SERVER';
-            }
-            if (roleT1R) {
-              roleT1R.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-sky-400 text-slate-950 shadow flex items-center gap-1';
-              roleT1R.innerHTML = '<i class="fa-solid fa-crosshairs text-[8px]"></i> RECEIVER';
-            }
-            activeServerName = PikolState.positions.team2.right;
-            activeReceiverName = PikolState.positions.team1.right;
+            cT2R?.classList.remove('bg-sky-950/40'); cT2R?.classList.add('border-lime-400', 'bg-lime-950/60');
+            cT1R?.classList.remove('bg-sky-950/40'); cT1R?.classList.add('border-sky-400', 'bg-sky-950/60');
+            if (roleT2R) { roleT2R.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-lime-400 text-slate-950 shadow'; roleT2R.textContent = 'SERVER'; roleT2R.classList.remove('hidden'); }
+            if (roleT1R) { roleT1R.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-sky-400 text-slate-950 shadow'; roleT1R.textContent = 'RECEIVER'; roleT1R.classList.remove('hidden'); }
           } else {
-            cT2L?.classList.remove('bg-sky-950/40');
-            cT2L?.classList.add('border-lime-400', 'bg-lime-950/60');
-            cT1L?.classList.remove('bg-sky-950/40');
-            cT1L?.classList.add('border-sky-400', 'bg-sky-950/60');
-
-            if (roleT2L) {
-              roleT2L.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-lime-400 text-slate-950 shadow flex items-center gap-1';
-              roleT2L.innerHTML = '<i class="fa-solid fa-table-tennis-paddle-ball text-[8px]"></i> SERVER';
-            }
-            if (roleT1L) {
-              roleT1L.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-sky-400 text-slate-950 shadow flex items-center gap-1';
-              roleT1L.innerHTML = '<i class="fa-solid fa-crosshairs text-[8px]"></i> RECEIVER';
-            }
-            activeServerName = PikolState.positions.team2.left;
-            activeReceiverName = PikolState.positions.team1.left;
+            cT2L?.classList.remove('bg-sky-950/40'); cT2L?.classList.add('border-lime-400', 'bg-lime-950/60');
+            cT1L?.classList.remove('bg-sky-950/40'); cT1L?.classList.add('border-sky-400', 'bg-sky-950/60');
+            if (roleT2L) { roleT2L.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-lime-400 text-slate-950 shadow'; roleT2L.textContent = 'SERVER'; roleT2L.classList.remove('hidden'); }
+            if (roleT1L) { roleT1L.className = 'text-[9px] font-black px-1.5 py-0.5 rounded bg-sky-400 text-slate-950 shadow'; roleT1L.textContent = 'RECEIVER'; roleT1L.classList.remove('hidden'); }
           }
-        }
-
-        if (diagNotice) {
-          diagNotice.innerHTML = `<span class="text-lime-300 font-bold">${activeServerName}</span> (Server) ➔ <span class="text-sky-300 font-bold">${activeReceiverName}</span> (Receiver)`;
         }
       }
 
@@ -1039,7 +939,7 @@
 
       function recordRallyPoint(winningTeam) {
         if (PikolState.isSetFinished) {
-          showToast("Set is already finished. Start a new match.");
+          showToast("Set is finished. Start next match.");
           return;
         }
 
@@ -1075,12 +975,11 @@
 
       function handleFault() {
         SoundFx.fault();
-
         if (PikolState.config.format === 'doubles') {
           if (PikolState.serverNumber === 1) {
             PikolState.serverNumber = 2;
             PikolState.servingCourt = (PikolState.servingCourt === 'right') ? 'left' : 'right';
-            showToast("Fault! Server 2 is now serving.");
+            showToast("Fault! Server 2 serving.");
           } else {
             triggerSideOut();
           }
@@ -1092,8 +991,8 @@
       function triggerSideOut() {
         PikolState.servingTeam = (PikolState.servingTeam === 1) ? 2 : 1;
         PikolState.serverNumber = 1;
-        PikolState.servingCourt = 'right'; // First server always starts on the right
-        showToast("Side Out! Serve rotated.");
+        PikolState.servingCourt = 'right';
+        showToast("Side Out!");
       }
 
       function checkMatchWinCondition() {
@@ -1134,8 +1033,8 @@
         if (scoreHead) scoreHead.textContent = `Final Score: ${matchRecord.scoreString}`;
         if (rrSummary) {
           const counts = PikolState.roster.map(p => PikolState.playerStats[p.name]?.matches?.length || 0);
-          const minG = Math.min(...counts);
-          const maxG = Math.max(...counts);
+          const minG = Math.min(...counts, 0);
+          const maxG = Math.max(...counts, 0);
           const reachedParity = (minG === maxG && minG > 0);
 
           rrSummary.innerHTML = `
@@ -1144,16 +1043,13 @@
               <span class="${reachedParity ? 'text-lime-400' : 'text-amber-400'}">${reachedParity ? '✓ Parity Reached' : 'In Progress'}</span>
             </div>
             <p class="text-[11px] text-slate-400 mt-1">
-              ${reachedParity ? `All ${PikolState.roster.length} players have played ${minG} match(es)!` : 'Next match will prioritize players who sat out or have played fewer games.'}
+              ${reachedParity ? `All ${PikolState.roster.length} players have played ${minG} match(es)!` : 'Next match will prioritize players who have played fewer games.'}
             </p>
           `;
         }
 
         modalWinnerCelebration?.classList.remove('hidden');
-        if ('speechSynthesis' in window && PikolState.config.voiceEnabled) {
-          window.speechSynthesis.cancel();
-          window.speechSynthesis.speak(new SpeechSynthesisUtterance(`Game over! ${matchRecord.winnerTeam} wins.`));
-        }
+        Announcer.speakScore();
       }
 
       function updatePlayerStatsFromMatch(record) {
@@ -1416,7 +1312,7 @@
         if (!matchup) return;
         PikolState.score = { team1: 0, team2: 0 };
         PikolState.isSetFinished = false;
-        PikolState.servingTeam = 1;
+        PikolState.servingTeam = PikolState.config.firstServingTeam || 1;
         PikolState.serverNumber = (PikolState.config.format === 'doubles') ? 2 : 1;
         PikolState.servingCourt = 'right';
         PikolState.matchHistory = [];
@@ -1424,8 +1320,8 @@
         if (PikolState.config.format === 'doubles') {
           PikolState.teams.team1 = { name: matchup.team1.join(' & '), players: matchup.team1 };
           PikolState.teams.team2 = { name: matchup.team2.join(' & '), players: matchup.team2 };
-          PikolState.positions.team1 = { left: matchup.team1[0], right: matchup.team1[1] };
-          PikolState.positions.team2 = { right: matchup.team2[0], left: matchup.team2[1] };
+          PikolState.positions.team1 = { left: matchup.team1[0], right: matchup.team1[1] }; // Left-Right
+          PikolState.positions.team2 = { right: matchup.team2[0], left: matchup.team2[1] }; // Right-Left mirror
         } else {
           PikolState.teams.team1 = { name: matchup.team1[0], players: [matchup.team1[0]] };
           PikolState.teams.team2 = { name: matchup.team2[0], players: [matchup.team2[0]] };
@@ -1435,10 +1331,11 @@
 
         renderScoreboard();
         modalMatchmaker?.classList.add('hidden');
-        showToast(`Match ready: ${PikolState.teams.team1.name} vs ${PikolState.teams.team2.name}`);
-        Announcer.speakScore();
+        showToast(`Match started: ${PikolState.teams.team1.name} vs ${PikolState.teams.team2.name}`);
+        Announcer.speakMatchStart();
       }
 
+      // Button Event Listeners
       document.getElementById('btnPointTeam1')?.addEventListener('click', () => recordRallyPoint(1));
       document.getElementById('btnPointTeam2')?.addEventListener('click', () => recordRallyPoint(2));
       document.getElementById('btnFaultRally')?.addEventListener('click', handleFault);
@@ -1467,19 +1364,17 @@
         showToast("Rally undone");
       });
 
-      document.getElementById('btnAnnounceScoreAudio')?.addEventListener('click', () => {
-        Announcer.speakScore();
-      });
+      document.getElementById('btnAnnounceScoreAudio')?.addEventListener('click', () => Announcer.speakScore());
 
       document.getElementById('btnResetMatchPrompt')?.addEventListener('click', () => {
         PikolState.score = { team1: 0, team2: 0 };
         PikolState.isSetFinished = false;
-        PikolState.servingTeam = 1;
+        PikolState.servingTeam = PikolState.config.firstServingTeam || 1;
         PikolState.serverNumber = (PikolState.config.format === 'doubles') ? 2 : 1;
         PikolState.servingCourt = 'right';
         PikolState.matchHistory = [];
         renderScoreboard();
-        showToast("Score reset to 0-0-2");
+        showToast("Score reset");
       });
 
       document.getElementById('btnVoiceToggle')?.addEventListener('click', () => {
@@ -1488,7 +1383,7 @@
         if (vIcon) {
           vIcon.className = PikolState.config.voiceEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark text-slate-500';
         }
-        showToast(PikolState.config.voiceEnabled ? "Voice Audio ON" : "Voice Audio Muted");
+        showToast(PikolState.config.voiceEnabled ? "Voice Audio ON" : "Voice Muted");
       });
 
       document.querySelectorAll('.btnTargetPts').forEach(btn => {
@@ -1499,6 +1394,16 @@
           btn.className = 'btnTargetPts px-2.5 py-1 rounded-lg border border-lime-400 bg-lime-400/20 text-lime-300 font-bold text-xs';
           PikolState.config.targetPoints = parseInt(btn.getAttribute('data-pts'), 10) || 11;
           document.querySelectorAll('.targetPtsSpan').forEach(s => s.textContent = PikolState.config.targetPoints);
+        });
+      });
+
+      document.querySelectorAll('.btnFirstServer').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.btnFirstServer').forEach(b => {
+            b.className = 'btnFirstServer px-3 py-1 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 font-semibold text-xs hover:bg-slate-700';
+          });
+          btn.className = 'btnFirstServer px-3 py-1 rounded-lg border border-lime-400 bg-lime-400/20 text-lime-300 font-bold text-xs';
+          PikolState.config.firstServingTeam = parseInt(btn.getAttribute('data-server'), 10) || 1;
         });
       });
 
@@ -1556,6 +1461,7 @@
         modalWinnerCelebration?.classList.add('hidden');
       });
 
+      // Tabs
       const tabs = [
         { btn: 'tabScoreboard', view: 'viewScoreboard' },
         { btn: 'tabLeaderboard', view: 'viewLeaderboard' },
@@ -1585,31 +1491,18 @@
       const btnCancelAddPlayer = document.getElementById('btnCancelAddPlayerDirect');
       const btnConfirmAddPlayer = document.getElementById('btnConfirmAddPlayerDirect');
 
-      function openDirectAddPlayerModal() {
-        if (!modalAddPlayerDirect) return;
-        modalAddPlayerDirect.classList.remove('hidden');
-        if (inputDirectPlayerName) {
-          inputDirectPlayerName.value = '';
-          inputDirectPlayerName.focus();
-        }
-      }
-
-      function closeDirectAddPlayerModal() {
-        modalAddPlayerDirect?.classList.add('hidden');
-      }
-
-      btnOpenAddPlayer?.addEventListener('click', openDirectAddPlayerModal);
-      btnCloseAddPlayer?.addEventListener('click', closeDirectAddPlayerModal);
-      btnCancelAddPlayer?.addEventListener('click', closeDirectAddPlayerModal);
+      btnOpenAddPlayer?.addEventListener('click', () => {
+        modalAddPlayerDirect?.classList.remove('hidden');
+        if (inputDirectPlayerName) { inputDirectPlayerName.value = ''; inputDirectPlayerName.focus(); }
+      });
+      btnCloseAddPlayer?.addEventListener('click', () => modalAddPlayerDirect?.classList.add('hidden'));
+      btnCancelAddPlayer?.addEventListener('click', () => modalAddPlayerDirect?.classList.add('hidden'));
 
       btnConfirmAddPlayer?.addEventListener('click', () => {
         const val = inputDirectPlayerName?.value?.trim();
-        if (!val) {
-          showToast("Please enter a player name");
-          return;
-        }
+        if (!val) { showToast("Enter player name"); return; }
         addPlayersToRoster(val, inputDirectPlayerRating?.value || "3.5");
-        closeDirectAddPlayerModal();
+        modalAddPlayerDirect?.classList.add('hidden');
       });
 
       inputDirectPlayerName?.addEventListener('keydown', (e) => {
@@ -1618,80 +1511,75 @@
           const val = inputDirectPlayerName.value.trim();
           if (!val) return;
           addPlayersToRoster(val, inputDirectPlayerRating?.value || "3.5");
-          closeDirectAddPlayerModal();
+          modalAddPlayerDirect?.classList.add('hidden');
         }
       });
 
-      // Change Match Players Modal
+      // Change Match Players Modal with Dropdowns
       const modalChangePlayers = document.getElementById('modalChangePlayers');
       const btnOpenChangePlayers = document.getElementById('btnOpenChangePlayers');
       const btnCloseChangePlayers = document.getElementById('btnCloseChangePlayers');
       const btnCancelChangePlayers = document.getElementById('btnCancelChangePlayers');
       const btnSaveChangePlayers = document.getElementById('btnSaveChangePlayers');
 
-      const inputSubT1Right = document.getElementById('inputSubT1Right');
-      const inputSubT1Left = document.getElementById('inputSubT1Left');
-      const inputSubT2Right = document.getElementById('inputSubT2Right');
-      const inputSubT2Left = document.getElementById('inputSubT2Left');
-      const rosterDatalist = document.getElementById('rosterDatalist');
-      const subQuickRosterChips = document.getElementById('subQuickRosterChips');
+      const selectSubT1Right = document.getElementById('selectSubT1Right');
+      const selectSubT1Left = document.getElementById('selectSubT1Left');
+      const selectSubT2Right = document.getElementById('selectSubT2Right');
+      const selectSubT2Left = document.getElementById('selectSubT2Left');
 
-      function openChangePlayersModal() {
+      function populatePlayerDropdowns() {
+        const rosterNames = PikolState.roster.map(p => p.name);
+        const currentPlayers = [
+          PikolState.positions.team1.left,
+          PikolState.positions.team1.right,
+          PikolState.positions.team2.right,
+          PikolState.positions.team2.left
+        ];
+
+        // Ensure current active players are in dropdown list even if not in roster
+        const allOptions = Array.from(new Set([...rosterNames, ...currentPlayers])).filter(Boolean);
+
+        [selectSubT1Left, selectSubT1Right, selectSubT2Right, selectSubT2Left].forEach(sel => {
+          if (!sel) return;
+          const currentVal = sel.value;
+          sel.innerHTML = allOptions.map(name => `<option value="${name}">${name}</option>`).join('');
+        });
+
+        if (selectSubT1Left) selectSubT1Left.value = PikolState.positions.team1.left;
+        if (selectSubT1Right) selectSubT1Right.value = PikolState.positions.team1.right;
+        if (selectSubT2Right) selectSubT2Right.value = PikolState.positions.team2.right;
+        if (selectSubT2Left) selectSubT2Left.value = PikolState.positions.team2.left;
+      }
+
+      btnOpenChangePlayers?.addEventListener('click', () => {
         if (!modalChangePlayers) return;
-
-        if (inputSubT1Right) inputSubT1Right.value = PikolState.positions.team1.right || '';
-        if (inputSubT1Left) inputSubT1Left.value = PikolState.positions.team1.left || '';
-        if (inputSubT2Right) inputSubT2Right.value = PikolState.positions.team2.right || '';
-        if (inputSubT2Left) inputSubT2Left.value = PikolState.positions.team2.left || '';
-
-        const isDoubles = (PikolState.config.format === 'doubles');
-        if (rosterDatalist) {
-          rosterDatalist.innerHTML = PikolState.roster.map(p => `<option value="${p.name}">`).join('');
-        }
-
-        if (subQuickRosterChips) {
-          if (PikolState.roster.length === 0) {
-            subQuickRosterChips.innerHTML = '<span class="text-[10px] text-slate-500 italic p-1">No other players in queue.</span>';
-          } else {
-            subQuickRosterChips.innerHTML = PikolState.roster.map(p => `
-              <button type="button" onclick="window.pikolApp.assignChipToEmpty('${p.name}')" class="text-[10px] px-2 py-0.5 rounded-lg bg-slate-800 hover:bg-lime-400 hover:text-slate-950 text-slate-300 border border-slate-700 transition">
-                + ${p.name}
-              </button>
-            `).join('');
-          }
-        }
-
+        populatePlayerDropdowns();
         modalChangePlayers.classList.remove('hidden');
-      }
+      });
 
-      function closeChangePlayersModal() {
-        modalChangePlayers?.classList.add('hidden');
-      }
-
-      btnOpenChangePlayers?.addEventListener('click', openChangePlayersModal);
-      btnCloseChangePlayers?.addEventListener('click', closeChangePlayersModal);
-      btnCancelChangePlayers?.addEventListener('click', closeChangePlayersModal);
+      btnCloseChangePlayers?.addEventListener('click', () => modalChangePlayers?.classList.add('hidden'));
+      btnCancelChangePlayers?.addEventListener('click', () => modalChangePlayers?.classList.add('hidden'));
 
       document.getElementById('btnSwapTeam1Players')?.addEventListener('click', () => {
-        if (!inputSubT1Right || !inputSubT1Left) return;
-        const temp = inputSubT1Right.value;
-        inputSubT1Right.value = inputSubT1Left.value;
-        inputSubT1Left.value = temp;
+        if (!selectSubT1Right || !selectSubT1Left) return;
+        const temp = selectSubT1Right.value;
+        selectSubT1Right.value = selectSubT1Left.value;
+        selectSubT1Left.value = temp;
       });
 
       document.getElementById('btnSwapTeam2Players')?.addEventListener('click', () => {
-        if (!inputSubT2Right || !inputSubT2Left) return;
-        const temp = inputSubT2Right.value;
-        inputSubT2Right.value = inputSubT2Left.value;
-        inputSubT2Left.value = temp;
+        if (!selectSubT2Right || !selectSubT2Left) return;
+        const temp = selectSubT2Right.value;
+        selectSubT2Right.value = selectSubT2Left.value;
+        selectSubT2Left.value = temp;
       });
 
       btnSaveChangePlayers?.addEventListener('click', () => {
         const isDoubles = (PikolState.config.format === 'doubles');
-        const t1L = inputSubT1Left?.value.trim() || 'Player 2';
-        const t1R = inputSubT1Right?.value.trim() || 'Player 1';
-        const t2R = inputSubT2Right?.value.trim() || 'Player 3';
-        const t2L = inputSubT2Left?.value.trim() || 'Player 4';
+        const t1L = selectSubT1Left?.value || 'Player 2';
+        const t1R = selectSubT1Right?.value || 'Player 1';
+        const t2R = selectSubT2Right?.value || 'Player 3';
+        const t2L = selectSubT2Left?.value || 'Player 4';
 
         PikolState.positions.team1.left = t1L;
         PikolState.positions.team1.right = t1R;
@@ -1706,40 +1594,19 @@
           PikolState.teams.team2 = { name: t2R, players: [t2R] };
         }
 
-        [t1L, t1R, t2R, t2L].forEach(name => {
-          if (name && name !== '—') {
-            if (!PikolState.roster.some(p => p.name.toLowerCase() === name.toLowerCase())) {
-              PikolState.roster.push({
-                id: 'p_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
-                name: name,
-                rating: '3.5',
-                timestamp: Date.now()
-              });
-            }
-            if (!PikolState.playerStats[name]) {
-              PikolState.playerStats[name] = { wins: 0, losses: 0, pointsScored: 0, pointDiff: 0, matches: [] };
-            }
-          }
-        });
-
         saveState();
         renderScoreboard();
         renderQueueTab();
         renderMatchmakerModal();
-        closeChangePlayersModal();
-        showToast("Match players updated!");
+        modalChangePlayers?.classList.add('hidden');
+        showToast("Match players updated successfully!");
       });
 
       document.getElementById('btnOpenMatchmaker')?.addEventListener('click', () => {
         renderMatchmakerModal();
         modalMatchmaker?.classList.remove('hidden');
       });
-      document.getElementById('btnCloseMatchmaker')?.addEventListener('click', () => {
-        modalMatchmaker?.classList.add('hidden');
-      });
-
-      document.getElementById('btnOpenRules')?.addEventListener('click', () => modalRulesRef?.classList.remove('hidden'));
-      document.getElementById('btnCloseRules')?.addEventListener('click', () => modalRulesRef?.classList.add('hidden'));
+      document.getElementById('btnCloseMatchmaker')?.addEventListener('click', () => modalMatchmaker?.classList.add('hidden'));
 
       document.getElementById('btnResetLeaderboard')?.addEventListener('click', () => {
         Object.keys(PikolState.playerStats).forEach(p => {
@@ -1771,42 +1638,27 @@
           PikolState.positions.team1.right = PikolState.positions.team1.left;
           PikolState.positions.team1.left = temp;
           renderCourtPositions();
-          showToast("Swapped Team 1 court sides");
+          showToast("Swapped Team 1 sides");
         },
         toggleSwapT2() {
           const temp = PikolState.positions.team2.right;
           PikolState.positions.team2.right = PikolState.positions.team2.left;
           PikolState.positions.team2.left = temp;
           renderCourtPositions();
-          showToast("Swapped Team 2 court sides");
-        },
-        assignChipToEmpty(playerName) {
-          const inputs = [inputSubT1Left, inputSubT1Right, inputSubT2Right, inputSubT2Left];
-          const empty = inputs.find(i => i && i.style.display !== 'none' && !i.value.trim());
-          if (empty) {
-            empty.value = playerName;
-          } else if (inputSubT1Right) {
-            inputSubT1Right.value = playerName;
-          }
+          showToast("Swapped Team 2 sides");
         }
       };
 
-      document.getElementById('btnSwapT1')?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        window.pikolApp.toggleSwapT1();
-      });
-      document.getElementById('btnSwapT2')?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        window.pikolApp.toggleSwapT2();
-      });
+      document.getElementById('btnSwapT1')?.addEventListener('click', (e) => { e.stopPropagation(); window.pikolApp.toggleSwapT1(); });
+      document.getElementById('btnSwapT2')?.addEventListener('click', (e) => { e.stopPropagation(); window.pikolApp.toggleSwapT2(); });
 
+      // Initial Render
       renderScoreboard();
       renderLeaderboard();
       renderArchive();
       renderQueueTab();
       renderMatchmakerModal();
-      
-      // If roster is empty, show matchmaker on load
+
       if (PikolState.roster.length === 0) {
         modalMatchmaker?.classList.remove('hidden');
       } else {
